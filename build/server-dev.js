@@ -5,8 +5,9 @@ const compiler = webpack(webpackConfig);
 const express = require('express');
 const app = express();
 const path = require('path');
+const rootPath = path.join(__dirname, "../");
 
-app.use('/dist', express.static(path.join(__dirname, '../dist')))
+app.use('/static', express.static(rootPath + 'dist'));
 
 app.use(middleware(compiler, {
     noInfo: true,
@@ -14,7 +15,7 @@ app.use(middleware(compiler, {
 }));
 
 app.get("/", (req, res) => {
-    return res.sendFile(path.join(__dirname, "../index.html"));
+    return res.sendFile('index.html', { root: rootPath });
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Server listening on port 3000!'));

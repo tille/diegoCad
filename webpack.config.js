@@ -2,11 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
-  entry: {
-    app: './main.js',
-  },
+  entry: './src/main.js',
   resolve: {
+    extensions: ['.js', '.vue'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     }
