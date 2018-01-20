@@ -1,9 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
 const rootPath = path.join(__dirname, "../");
 const middleware = require('webpack-dev-middleware');
 const webpackConfig = require(rootPath + '/build/webpack.dev.config');
-const compiler = webpack(webpackConfig);
+const compiler = require('webpack')(webpackConfig);
 const express = require('express');
 const app = express();
 const env = process.env.NODE_ENV;
