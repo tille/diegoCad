@@ -1,8 +1,9 @@
 {
   "name": "hello-vue",
   "scripts": {
-    "start": "node build/server-dev.js",
-    "build": "node_modules/.bin/webpack -p",
+    "start": "node build/dev-server.js",
+    "build": "webpack -p --config build/webpack.prod.config.js",
+    "dev": "webpack-dev-server build/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -10,7 +11,10 @@
     "vue": "^2.5.13"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
     "webpack": "^3.10.0",
-    "webpack-dev-middleware": "^2.0.4"
+    "webpack-dev-middleware": "^2.0.4",
+    "webpack-dev-server": "^2.11.0",
+    "webpack-hot-middleware": "^2.21.0"
   }
 }
