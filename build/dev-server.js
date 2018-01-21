@@ -6,12 +6,15 @@ const compiler = require('webpack')(webpackConfig);
 const express = require('express');
 const app = express();
 const env = process.env.NODE_ENV;
+const webpackHotMiddleware = require("webpack-hot-middleware");
 
 if (env !== "production") {
     app.use(middleware(compiler, {
         noInfo: true,
-        publicPath: webpackConfig.output.path
+        publicPath: webpackConfig.output.publicPath
     }));
+
+    app.use(webpackHotMiddleware(compiler));
 
     app.get("/", (req, res, next) => {
         const filename = path.join(__dirname, "../dist/index.html");
@@ -25,7 +28,7 @@ if (env !== "production") {
         });
     });
 } else {
-    app.use('/', express.static(rootPath + '/dist'));
+    app.use('/dist', express.static(rootPath + '/dist'));
 
     app.get("/", (req, res) => {
         return res.sendFile('index.html', { root: rootPath + '/dist' });
